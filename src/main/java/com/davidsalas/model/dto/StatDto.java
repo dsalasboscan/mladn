@@ -1,13 +1,11 @@
 package com.davidsalas.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@EqualsAndHashCode
-@ToString
+@Data
+@NoArgsConstructor
 public class StatDto {
 
   @JsonProperty("count_mutant_dna")

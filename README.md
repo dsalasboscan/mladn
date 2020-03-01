@@ -58,7 +58,7 @@ HTTP 403 -> En caso de NO detectar un mutante
 ```
 
  
- ## Pasos para probar levantar el proyecto localmente:
+ ## Pasos para levantar el proyecto localmente:
    ```bash
     git clone git@github.com:dsalasboscan/mladn.git
     cd mladn
