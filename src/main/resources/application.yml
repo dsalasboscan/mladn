@@ -1,0 +1,16 @@
+server:
+  tomcat:
+    max-threads: 1000000
+
+spring:
+  h2:
+    console:
+      enabled: true
+
+datasource:
+  h2:
+    dna:
+      jdbcUrl: jdbc:h2:mem:Dna
+      username: 'sa'
+      password: ''
+      driver-class-name: org.h2.Driver
