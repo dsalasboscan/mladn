@@ -52,7 +52,7 @@ public class DnaRepository {
   }
 
   private MapSqlParameterSource mapSqlParameterSource(Human human) {
-    Map<String, Object> parameters = new HashMap<>(2);
+    Map<String, Object> parameters = new HashMap<>(1);
     parameters.put("is_mutant", human.isMutant());
     return new MapSqlParameterSource(parameters);
   }

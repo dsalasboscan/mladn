@@ -29,7 +29,11 @@ public class DnaService {
     String hashedDna = dnaHash(dna);
     Human human = new Human(hashedDna);
 
-    if (cacheService.containsDna(hashedDna)) return cacheService.get(hashedDna);
+    if (cacheService.containsDna(hashedDna)) {
+      human.setMutant(cacheService.get(hashedDna));
+      dnaRepository.save(human);
+      return human.isMutant();
+    }
 
     if (traverseService.traverse(dna) > 1) {
       human.setMutant(true);
