@@ -1,5 +1,7 @@
 server:
   port: 9090
+  tomcat:
+    max-threads: 400
 
 spring:
   h2:

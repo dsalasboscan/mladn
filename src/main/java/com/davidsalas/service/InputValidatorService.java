@@ -23,7 +23,8 @@ public class InputValidatorService {
   private void validateNucleoidsAreValid(String[] dna) {
     try {
       Arrays.stream(dna)
-          .flatMap(it -> it.chars().mapToObj(e -> (char) e)).collect(Collectors.toList()).forEach(it -> Nucleoid.valueOf(it.toString()));
+          .flatMap(it -> it.chars().mapToObj(e -> (char) e)).collect(Collectors.toList())
+          .forEach(it -> Nucleoid.valueOf(it.toString()));
     } catch (IllegalArgumentException e) {
       logger.error("DNA's nucleoid must be one of A, T, C, G");
       throw new InvalidNucleoidNameException();

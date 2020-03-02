@@ -24,11 +24,10 @@ class DnaRepositorySpec extends Specification {
 
     def "given a human call jdbcTemplate.update"() {
         given:
-        String dnaHash = "HASH"
         Map<String, Object> parameters = new HashMap<>()
         parameters.put("is_mutant", false)
 
-        Human human = new Human(dnaHash)
+        Human human = new Human()
 
         when:
         mutantRepository.save(human)
@@ -40,8 +39,7 @@ class DnaRepositorySpec extends Specification {
 
     def "given a dataAccessException when save dna is called, then return a controlled DataBaseException"() {
         given:
-        String dnaHash = "HASH"
-        Human human = new Human(dnaHash)
+        Human human = new Human()
 
         jdbcTemplate.update(_ as String, _ as MapSqlParameterSource) >> {
             throw new UncategorizedSQLException("", "", new SQLException("", "", 20))

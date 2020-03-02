@@ -19,7 +19,7 @@ letras consecutivas sumara un nuevo mutante a la variable compartida.
 - Local: localhost:9090
 
 ## Collection postman
-Esta ubicada en la ruta: $ProjectRoot/env
+Esta ubicada en la ruta: $PROJECT_ROOT/env
 
 ## Detectar mutantes
 

@@ -196,7 +196,7 @@ class FunctionalSpec extends Specification {
                             "GCCACGACCC",
                             "ATTGATCAAC",
                             "CTCTTACGCG",
-                            "AGGCAAGATA",
+                            "AGGCCAGATA",
                             "TCTGCGTCCA",
                             "TACAGCGTGT",
                             "GTATGATCAC",

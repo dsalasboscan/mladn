@@ -32,12 +32,6 @@ public class TraverseService {
     traverseTasks = initTraverseMatrixTasks(dna, mutantCount);
 
     while (mutantCount.getValue() < 2) {
-      try {
-        Thread.sleep(10);
-      } catch (InterruptedException e) {
-        logger.error(e.getMessage());
-      }
-
       if (traverseTasks.stream().allMatch(Future::isDone)) return mutantCount.getValue();
     }
 
@@ -69,7 +63,7 @@ public class TraverseService {
       Counter verticalCounter = new Counter(1);
       for (int col = colLength - 1; col >= midPoint; col--) {
         for (int row = 1; row < rowLength; row++) {
-          /*if (mutantCounter.getValue() > 1) return;*/
+          if (mutantCounter.getValue() > 1) return;
           dnaValidatorService.validateVertical(dna, row, col, verticalCounter, mutantCounter);
         }
         verticalCounter.resetTo(1);
