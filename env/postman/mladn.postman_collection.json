@@ -1,0 +1,191 @@
+{
+	"info": {
+		"_postman_id": "3f5a9901-4dfa-4360-be3a-d6514e98c77e",
+		"name": "mladn",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "stats cloud",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://mladn.herokuapp.com/stats",
+					"protocol": "https",
+					"host": [
+						"mladn",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"stats"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "stats local",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9090/stats",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"stats"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "no mutant local",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"dna\": [\n    \"TTGC\",\n    \"AAAA\",\n    \"CCGT\",\n    \"CTAG\"\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/mutant",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"mutant"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "no mutant cloud",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"dna\": [\n    \"TTGC\",\n    \"AAAA\",\n    \"CCGT\",\n    \"CTAG\"\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://mladn.herokuapp.com/mutant",
+					"protocol": "https",
+					"host": [
+						"mladn",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"mutant"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mutant cloud",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"dna\": [\n    \"CTGCTACGAT\",\n    \"TGAGATTAGG\",\n    \"GCCACGACCC\",\n    \"ATTGATCAAC\",\n    \"CTCTTACGCG\",\n    \"AGGCAAGATA\",\n    \"TCTGCGTCCA\",\n    \"TACAGCGTGT\",\n    \"GTATGATCAC\",\n    \"CGACACCATT\"\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://mladn.herokuapp.com/mutant",
+					"protocol": "https",
+					"host": [
+						"mladn",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"mutant"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mutant local",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"dna\": [\n    \"CTGCTACGAT\",\n    \"TGAGATTAGG\",\n    \"GCCACGACCC\",\n    \"ATTGATCAAC\",\n    \"CTCTTACGCG\",\n    \"AGGCAAGATA\",\n    \"TCTGCGTCCA\",\n    \"TACAGCGTGT\",\n    \"GTATGATCAC\",\n    \"CGACACCATT\"\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/mutant",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"mutant"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

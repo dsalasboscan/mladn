@@ -18,6 +18,9 @@ letras consecutivas sumara un nuevo mutante a la variable compartida.
 - Cloud: https://mladn.herokuapp.com
 - Local: localhost:9090
 
+## Collection postman
+Esta ubicada en la ruta: $ProjectRoot/env
+
 ## Detectar mutantes
 
 ### `POST` /mutants
