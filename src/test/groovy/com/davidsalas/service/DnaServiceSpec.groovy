@@ -10,10 +10,10 @@ class DnaServiceSpec extends Specification {
 
     TraverseService traverseService = Mock()
     InputValidatorService inputValidatorService = Mock()
-    DnaRepository mutantRepository = Mock()
+    DnaRepository dnaRepository = Mock()
 
     def setup() {
-        dnaService = new DnaService(traverseService, mutantRepository, inputValidatorService)
+        dnaService = new DnaService(traverseService, dnaRepository, inputValidatorService)
     }
 
     def "given a 6x6 return true when mutant count > 1"() {

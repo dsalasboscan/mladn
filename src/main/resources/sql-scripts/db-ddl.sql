@@ -6,8 +6,11 @@ USE dbo;
 
 CREATE TABLE IF NOT EXISTS dbo.Dna (
     id BIGINT AUTO_INCREMENT,
+    dna_hash VARCHAR(32) NOT NULL ,
     is_mutant BOOLEAN NOT NULL,
     PRIMARY KEY (id)
 );
+
+CREATE INDEX dna_hash ON dbo.Dna(dna_hash);
 
 COMMIT;
