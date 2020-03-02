@@ -69,9 +69,10 @@ public class TraverseService {
       Counter verticalCounter = new Counter(1);
       for (int col = colLength - 1; col >= midPoint; col--) {
         for (int row = 1; row < rowLength; row++) {
-          if (mutantCounter.getValue() > 1) return;
+          /*if (mutantCounter.getValue() > 1) return;*/
           dnaValidatorService.validateVertical(dna, row, col, verticalCounter, mutantCounter);
         }
+        verticalCounter.resetTo(1);
       }
     };
   }
@@ -84,6 +85,7 @@ public class TraverseService {
           if (mutantCounter.getValue() > 1) return;
           dnaValidatorService.validateVertical(dna, row, col, verticalCounter, mutantCounter);
         }
+        verticalCounter.resetTo(1);
       }
     };
   }
@@ -96,6 +98,7 @@ public class TraverseService {
           if (mutantCounter.getValue() > 1) return;
           dnaValidatorService.validateHorizontal(dna, row, col, horizontalCounter, mutantCounter);
         }
+        horizontalCounter.resetTo(1);
       }
     };
   }
@@ -108,6 +111,7 @@ public class TraverseService {
           if (mutantCounter.getValue() > 1) return;
           dnaValidatorService.validateHorizontal(dna, row, col, horizontalCounter, mutantCounter);
         }
+        horizontalCounter.resetTo(1);
       }
     };
   }
@@ -121,6 +125,7 @@ public class TraverseService {
           dnaValidatorService.validateDiagonal(dna, row, col, DiagonalValidationDirection.LEFT_UP, diagonalCounter,
               mutantCount);
         }
+        diagonalCounter.resetTo(1);
       }
     };
   }
@@ -134,6 +139,7 @@ public class TraverseService {
           dnaValidatorService.validateDiagonal(dna, row, col, DiagonalValidationDirection.RIGHT_UP, diagonalCounter,
               mutantCount);
         }
+        diagonalCounter.resetTo(1);
       }
     };
   }
@@ -147,6 +153,7 @@ public class TraverseService {
           dnaValidatorService.validateDiagonal(dna, row, col, DiagonalValidationDirection.RIGHT_DOWN, diagonalCounter,
               mutantCount);
         }
+        diagonalCounter.resetTo(1);
       }
     };
   }
@@ -160,6 +167,7 @@ public class TraverseService {
           dnaValidatorService.validateDiagonal(dna, row, col, DiagonalValidationDirection.LEFT_DOWN, diagonalCounter,
               mutantCount);
         }
+        diagonalCounter.resetTo(1);
       }
     };
   }

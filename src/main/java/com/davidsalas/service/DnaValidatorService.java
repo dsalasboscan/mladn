@@ -70,7 +70,7 @@ public class DnaValidatorService {
   private void validateIfMutant(Counter counter, Counter mutantCounter) {
     if (counter.getValue() == 4) {
       mutantCounter.increment();
-      counter.resetTo(1);
+      counter.resetTo(0);
     }
   }
 }

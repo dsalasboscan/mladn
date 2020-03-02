@@ -26,10 +26,10 @@ class FunctionalSpec extends Specification {
     MockMvc mockMvc
 
     @Autowired
-    private WebApplicationContext wac;
+    private WebApplicationContext wac
 
     void setup() {
-        mockMvc = MockMvcBuilders.webAppContextSetup(wac).alwaysDo(MockMvcResultHandlers.print()).build();
+        mockMvc = MockMvcBuilders.webAppContextSetup(wac).alwaysDo(MockMvcResultHandlers.print()).build()
     }
 
     def "given a 10 x 10 matrix with mutant genes return HTTP 200"() {
@@ -64,6 +64,74 @@ class FunctionalSpec extends Specification {
                                     "AAAA",
                                     "CCGT",
                                     "CTAG"
+                               ]
+                            }
+                        """
+        ).andExpect(status().isForbidden())
+    }
+
+    def "given a 4 x 4 matrix with two mutant genes in vertical return HTTP 200"() {
+        expect:
+        postIsMutant(
+                """
+                            {
+                                "dna": [
+                                    "ATGT",
+                                    "AAAT",
+                                    "ACGT",
+                                    "ATAT"
+                               ]
+                            }
+                        """
+        ).andExpect(status().isOk())
+    }
+
+    def "given a 4 x 4 matrix with two mutant genes in horizontal return HTTP 200"() {
+        expect:
+        postIsMutant(
+                """
+                            {
+                                "dna": [
+                                    "TTTT",
+                                    "AGTG",
+                                    "ATGC",
+                                    "TTTT"
+                               ]
+                            }
+                        """
+        ).andExpect(status().isOk())
+    }
+
+    def "given a 5 x 5 matrix with two mutant genes in diagonal return HTTP 200"() {
+        expect:
+        postIsMutant(
+                """
+                            {
+                                "dna": [
+                                    "TCTTG",
+                                    "TTTGG",
+                                    "ATGTC",
+                                    "TGTTT",
+                                    "TGTTG"
+                               ]
+                            }
+                        """
+        ).andExpect(status().isOk())
+    }
+
+    def "given a 5 x 5 matrix with one mutant gen return HTTP 403"() {
+        expect:
+        postIsMutant(
+                """
+                            {
+                                "dna": [
+                                    "TCTCGCA",
+                                    "TGTGGTA",
+                                    "ATCGCCA",
+                                    "TCCTCCA",
+                                    "AGTTGTA",
+                                    "TGTTGTA",
+                                    "TGTCGTA"
                                ]
                             }
                         """
