@@ -28,8 +28,6 @@ public class DnaService {
 
   @Cacheable(cacheNames = "dna")
   public boolean isMutant(String[] dna) {
-    logger.info("Detecting if human is mutant with dna: {}", Arrays.toString(dna));
-
     String dnaHash = doHashDna(dna);
     Human human = dnaRepository.getHuman(dnaHash);
 
@@ -41,7 +39,7 @@ public class DnaService {
 
     human = new Human(dnaHash);
 
-    if (traverseService.traverse(dna) > 1) {
+    if (traverseService.traverseMatrix(dna) > 1) {
       human.setMutant(true);
     }
 

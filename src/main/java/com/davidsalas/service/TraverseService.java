@@ -24,7 +24,7 @@ public class TraverseService {
     this.executorService = executorService;
   }
 
-  public int traverse(String[] dna) {
+  public int traverseMatrix(String[] dna) {
     Counter mutantCount = new Counter(0);
 
     List<Future<?>> traverseTasks;

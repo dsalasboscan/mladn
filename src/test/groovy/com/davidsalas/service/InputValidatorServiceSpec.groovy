@@ -32,7 +32,7 @@ class InputValidatorServiceSpec extends Specification {
         noExceptionThrown()
     }
 
-    def "given a matrix with an invalid Nucleoid throw InvalidNucleoidNameException"() {
+    def "given a matrix with an invalid Nucleoid throw ExecutionException"() {
         given:
         String[] dna = [
                 "AAGGTTCC",
@@ -62,6 +62,86 @@ class InputValidatorServiceSpec extends Specification {
                 "AAGGzTCC",
                 "AAGGTTCC",
                 "AAGGTTCC",
+                "AAGGTTCC",
+        ]
+
+        when:
+        inputValidatorService.validate(dna)
+
+        then:
+        thrown(InvalidNucleoidNameException)
+    }
+
+    def "given a matrix with an invalid Nucleoid in the top half throw InvalidNucleoidNameException"() {
+        given:
+        String[] dna = [
+                "AAGGTTCC",
+                "AAGGTTCC",
+                "AAGGTTCZ",
+                "AAGGTTCC",
+                "AAGGATCC",
+                "AAGGTTCC",
+                "AAGGTTCC",
+                "AAGGTTCC",
+        ]
+
+        when:
+        inputValidatorService.validate(dna)
+
+        then:
+        thrown(InvalidNucleoidNameException)
+    }
+
+    def "given a matrix with an invalid Nucleoid in the top half on left throw InvalidNucleoidNameException"() {
+        given:
+        String[] dna = [
+                "AAGGTTCC",
+                "AAGGTTCC",
+                "HAGGTTCG",
+                "AAGGTTCC",
+                "AAGGATCC",
+                "AAGGTTCC",
+                "AAGGTTCC",
+                "AAGGTTCC",
+        ]
+
+        when:
+        inputValidatorService.validate(dna)
+
+        then:
+        thrown(InvalidNucleoidNameException)
+    }
+
+    def "given a matrix with an invalid Nucleoid in the bottom half on left throw InvalidNucleoidNameException"() {
+        given:
+        String[] dna = [
+                "AAGGTTCC",
+                "AAGGTTCC",
+                "AAGGTTCG",
+                "AAGGTTCC",
+                "AAGGATCC",
+                "AAGGTTCC",
+                "PAGGTTCC",
+                "AAGGTTCC",
+        ]
+
+        when:
+        inputValidatorService.validate(dna)
+
+        then:
+        thrown(InvalidNucleoidNameException)
+    }
+
+    def "given a matrix with an invalid Nucleoid in the bottom half on right throw InvalidNucleoidNameException"() {
+        given:
+        String[] dna = [
+                "AAGGTTCC",
+                "AAGGTTCC",
+                "AAGGTTCG",
+                "AAGGTTCC",
+                "AAGGATCC",
+                "AAGGTTCC",
+                "GAGGTTCH",
                 "AAGGTTCC",
         ]
 

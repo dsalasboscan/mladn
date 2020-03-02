@@ -26,7 +26,7 @@ class DnaServiceSpec extends Specification {
                 "GTCAAC",
                 "TGCTCA"
         ]
-        traverseService.traverse(dna) >> 2
+        traverseService.traverseMatrix(dna) >> 2
 
         when:
         boolean result = dnaService.isMutant(dna)
@@ -43,7 +43,7 @@ class DnaServiceSpec extends Specification {
                 "CCGT",
                 "CTAG"
         ]
-        traverseService.traverse(dna) >> 1
+        traverseService.traverseMatrix(dna) >> 1
 
         when:
         boolean result = dnaService.isMutant(dna)

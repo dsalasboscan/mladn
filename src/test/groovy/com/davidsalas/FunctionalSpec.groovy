@@ -154,7 +154,7 @@ class FunctionalSpec extends Specification {
                 .andExpect(jsonPath('$.message', is("The imput array must be NxN")))
     }
 
-    def "given a 4 x 4 matrix return bad request because it has an invalid Nucleoid (not G, T, A, C)"() {
+    def "given a 4 x 4 matrix return bad request because it has an invalid Nucleoid (not G, T, A, C) on right down corner"() {
         expect:
         postIsMutant(
                 """
@@ -164,6 +164,24 @@ class FunctionalSpec extends Specification {
                                     "AAAA",
                                     "AAAA",
                                     "AAAZ"
+                               ]
+                            }
+                        """
+        )
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath('$.message', is("DNA's nucleoid must be one of A, T, C, G")))
+    }
+
+    def "given a 4 x 4 matrix return bad request because it has an invalid Nucleoid (not G, T, A, C) on left up corner"() {
+        expect:
+        postIsMutant(
+                """
+                            {
+                                "dna": [
+                                    "ZTGC",
+                                    "AAAA",
+                                    "AAAA",
+                                    "AAAA"
                                ]
                             }
                         """
