@@ -6,8 +6,15 @@ plugins {
     id 'jacoco'
 }
 
-group = 'com.davidsalas'
-version = '1.0.0'
+def app = [
+        group      : 'com.davidsalas',
+        name       : 'mladn',
+        version    : '1.0.0',
+        versionType: 'RELEASE'
+]
+
+group = app.group
+version = app.version
 sourceCompatibility = '8'
 
 configurations {
@@ -28,7 +35,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-cache'
-    implementation group: 'commons-codec', name: 'commons-codec', version: '1.14'
+    implementation 'commons-codec:commons-codec:1.14'
     runtimeOnly 'com.h2database:h2'
 
     compileOnly 'org.projectlombok:lombok'
@@ -44,7 +51,7 @@ dependencies {
 
 bootJar {
     mainClassName = 'com.davidsalas.MlAdnApplication'
-
+    archiveFileName = "${app.name}-${app.version}-${app.versionType}.jar"
 }
 
 jacoco {

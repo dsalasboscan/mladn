@@ -1,7 +1,5 @@
 server:
   port: 9090
-  tomcat:
-    max-threads: 400
 
 spring:
   h2:
@@ -11,7 +9,7 @@ spring:
 datasource:
   h2:
     dna:
-      jdbcUrl: jdbc:h2:mem:Dna
+      jdbcUrl: jdbc:h2:file:/tmp/Dna.db
       username: 'sa'
       password: ''
       driver-class-name: org.h2.Driver

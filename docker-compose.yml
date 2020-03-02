@@ -1,0 +1,14 @@
+version: '3'
+services:
+  mladn:
+    build: .
+    container_name: mladn
+    ports:
+      - "9090:9090"
+    networks:
+      - solution_private
+networks:
+  solution_private:
+    ipam:
+      config:
+        - subnet: 10.10.0.0/16

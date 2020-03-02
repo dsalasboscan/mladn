@@ -2,8 +2,6 @@ package com.davidsalas.service;
 
 import com.davidsalas.model.DiagonalValidationDirection;
 import com.davidsalas.util.Counter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,14 +15,12 @@ public class TraverseService {
   private DnaValidatorService dnaValidatorService;
   private ExecutorService executorService;
 
-  private static final Logger logger = LoggerFactory.getLogger(TraverseService.class);
-
   public TraverseService(DnaValidatorService dnaValidatorService, ExecutorService executorService) {
     this.dnaValidatorService = dnaValidatorService;
     this.executorService = executorService;
   }
 
-  public int traverseMatrix(String[] dna) {
+  public int findMutant(String[] dna) {
     Counter mutantCount = new Counter(0);
 
     List<Future<?>> traverseTasks;
@@ -41,28 +37,27 @@ public class TraverseService {
   private List<Future<?>> initTraverseMatrixTasks(String[] dna, Counter mutantCount) {
     List<Future<?>> tasks = new ArrayList<>();
     int midPoint = (dna[0].length() / 2);
-    int rowLength = dna.length;
-    int colLength = dna[0].length();
+    int length = dna.length;
 
-    tasks.add(executorService.submit(traverseVerticalFromRight(dna, midPoint, rowLength, colLength, mutantCount)));
-    tasks.add(executorService.submit(traverseVerticalFromLeft(dna, midPoint, rowLength, mutantCount)));
+    tasks.add(executorService.submit(traverseVerticalFromRight(dna, midPoint, length, mutantCount)));
+    tasks.add(executorService.submit(traverseVerticalFromLeft(dna, midPoint, length, mutantCount)));
 
-    tasks.add(executorService.submit(traverseHorizontalFromUp(dna, midPoint, colLength, mutantCount)));
-    tasks.add(executorService.submit(traverseHorizontalFromDown(dna, midPoint, rowLength, colLength, mutantCount)));
+    tasks.add(executorService.submit(traverseHorizontalFromUp(dna, midPoint, length, mutantCount)));
+    tasks.add(executorService.submit(traverseHorizontalFromDown(dna, midPoint, length, mutantCount)));
 
-    tasks.add(executorService.submit(traverseDiagonalFromRightUp(dna, rowLength, colLength, mutantCount)));
-    tasks.add(executorService.submit(traverseDiagonalFromLeftUp(dna, rowLength, mutantCount)));
-    tasks.add(executorService.submit(traverseDiagonalFromRightDown(dna, rowLength, colLength, mutantCount)));
-    tasks.add(executorService.submit(traverseDiagonalLeftDown(dna, rowLength, mutantCount)));
+    tasks.add(executorService.submit(traverseDiagonalFromRightUp(dna, length, mutantCount)));
+    tasks.add(executorService.submit(traverseDiagonalFromLeftUp(dna, length, mutantCount)));
+    tasks.add(executorService.submit(traverseDiagonalFromRightDown(dna, length, mutantCount)));
+    tasks.add(executorService.submit(traverseDiagonalLeftDown(dna, length, mutantCount)));
 
     return tasks;
   }
 
-  private Runnable traverseVerticalFromRight(String[] dna, int midPoint, int rowLength, int colLength, Counter mutantCounter) {
+  private Runnable traverseVerticalFromRight(String[] dna, int midPoint, int length, Counter mutantCounter) {
     return () -> {
       Counter verticalCounter = new Counter(1);
-      for (int col = colLength - 1; col >= midPoint; col--) {
-        for (int row = 1; row < rowLength; row++) {
+      for (int col = length - 1; col >= midPoint; col--) {
+        for (int row = 1; row < length; row++) {
           if (mutantCounter.getValue() > 1) return;
           dnaValidatorService.validateVertical(dna, row, col, verticalCounter, mutantCounter);
         }
@@ -71,11 +66,11 @@ public class TraverseService {
     };
   }
 
-  private Runnable traverseVerticalFromLeft(String[] dna, int midPoint, int rowLength, Counter mutantCounter) {
+  private Runnable traverseVerticalFromLeft(String[] dna, int midPoint, int length, Counter mutantCounter) {
     return () -> {
       Counter verticalCounter = new Counter(1);
-      for (int col = 0; col <= midPoint; col++) {
-        for (int row = 1; row < rowLength; row++) {
+      for (int col = 0; col < midPoint; col++) {
+        for (int row = 1; row < length; row++) {
           if (mutantCounter.getValue() > 1) return;
           dnaValidatorService.validateVertical(dna, row, col, verticalCounter, mutantCounter);
         }
@@ -84,11 +79,11 @@ public class TraverseService {
     };
   }
 
-  private Runnable traverseHorizontalFromUp(String[] dna, int midPoint, int colLength, Counter mutantCounter) {
+  private Runnable traverseHorizontalFromUp(String[] dna, int midPoint, int length, Counter mutantCounter) {
     return () -> {
       Counter horizontalCounter = new Counter(1);
       for (int row = 0; row < midPoint; row++) {
-        for (int col = 1; col < colLength; col++) {
+        for (int col = 1; col < length; col++) {
           if (mutantCounter.getValue() > 1) return;
           dnaValidatorService.validateHorizontal(dna, row, col, horizontalCounter, mutantCounter);
         }
@@ -97,11 +92,11 @@ public class TraverseService {
     };
   }
 
-  private Runnable traverseHorizontalFromDown(String[] dna, int midPoint, int rowLength, int colLength, Counter mutantCounter) {
+  private Runnable traverseHorizontalFromDown(String[] dna, int midPoint, int length, Counter mutantCounter) {
     return () -> {
       Counter horizontalCounter = new Counter(1);
-      for (int row = rowLength - 1; row > midPoint; row--) {
-        for (int col = 1; col < colLength; col++) {
+      for (int row = length - 1; row >= midPoint; row--) {
+        for (int col = 1; col < length; col++) {
           if (mutantCounter.getValue() > 1) return;
           dnaValidatorService.validateHorizontal(dna, row, col, horizontalCounter, mutantCounter);
         }
@@ -110,11 +105,11 @@ public class TraverseService {
     };
   }
 
-  private Runnable traverseDiagonalFromRightUp(String[] dna, int rowLength, int colLength, Counter mutantCount) {
+  private Runnable traverseDiagonalFromRightUp(String[] dna, int length, Counter mutantCount) {
     return () -> {
       Counter diagonalCounter = new Counter(1);
-      for (int rowPivot = 3; rowPivot < rowLength - 1; rowPivot++) {
-        for (int row = rowPivot, col = colLength - 1; row > 0; row--, col--) {
+      for (int rowPivot = 3; rowPivot < length -1; rowPivot++) {
+        for (int row = rowPivot, col = length - 1; row > 0; row--, col--) {
           if (mutantCount.getValue() > 1) return;
           dnaValidatorService.validateDiagonal(dna, row, col, DiagonalValidationDirection.LEFT_UP, diagonalCounter,
               mutantCount);
@@ -124,10 +119,10 @@ public class TraverseService {
     };
   }
 
-  private Runnable traverseDiagonalFromLeftUp(String[] dna, int rowLength, Counter mutantCount) {
+  private Runnable traverseDiagonalFromLeftUp(String[] dna, int length, Counter mutantCount) {
     return () -> {
       Counter diagonalCounter = new Counter(1);
-      for (int rowPivot = 3; rowPivot < rowLength - 1; rowPivot++) {
+      for (int rowPivot = 3; rowPivot < length - 1; rowPivot++) {
         for (int row = rowPivot, col = 0; row > 0; row--, col++) {
           if (mutantCount.getValue() > 1) return;
           dnaValidatorService.validateDiagonal(dna, row, col, DiagonalValidationDirection.RIGHT_UP, diagonalCounter,
@@ -152,11 +147,11 @@ public class TraverseService {
     };
   }
 
-  private Runnable traverseDiagonalFromRightDown(String[] dna, int rowLength, int colLength, Counter mutantCount) {
+  private Runnable traverseDiagonalFromRightDown(String[] dna, int length, Counter mutantCount) {
     return () -> {
       Counter diagonalCounter = new Counter(1);
-      for (int rowPivot = rowLength - 4; rowPivot >= 0; rowPivot--) {
-        for (int row = rowPivot, col = colLength - 1; rowLength - row > 1; row++, col--) {
+      for (int rowPivot = length - 4; rowPivot >= 0; rowPivot--) {
+        for (int row = rowPivot, col = length - 1; length - row > 1; row++, col--) {
           if (mutantCount.getValue() > 1) return;
           dnaValidatorService.validateDiagonal(dna, row, col, DiagonalValidationDirection.LEFT_DOWN, diagonalCounter,
               mutantCount);

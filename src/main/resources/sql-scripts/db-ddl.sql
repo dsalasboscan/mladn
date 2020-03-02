@@ -11,6 +11,6 @@ CREATE TABLE IF NOT EXISTS dbo.Dna (
     PRIMARY KEY (id)
 );
 
-CREATE INDEX dna_hash ON dbo.Dna(dna_hash);
+CREATE INDEX IF NOT EXISTS dna_hash ON dbo.Dna(dna_hash);
 
 COMMIT;

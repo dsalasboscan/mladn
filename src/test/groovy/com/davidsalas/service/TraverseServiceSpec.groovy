@@ -39,7 +39,7 @@ class TraverseServiceSpec extends Specification {
         ]
 
         when:
-        def response = traverseService.traverseMatrix(dna)
+        def response = traverseService.findMutant(dna)
 
         then:
         response >= MINIMUM_COUNT_TO_BE_A_MUTANT
@@ -60,7 +60,7 @@ class TraverseServiceSpec extends Specification {
         ]
 
         when:
-        def response = traverseService.traverseMatrix(dna)
+        def response = traverseService.findMutant(dna)
 
         then:
         response >= MINIMUM_COUNT_TO_BE_A_MUTANT
@@ -79,7 +79,7 @@ class TraverseServiceSpec extends Specification {
         ]
 
         when:
-        def response = traverseService.traverseMatrix(dna)
+        def response = traverseService.findMutant(dna)
 
         then:
         response < MINIMUM_COUNT_TO_BE_A_MUTANT
@@ -99,7 +99,7 @@ class TraverseServiceSpec extends Specification {
         ]
 
         when:
-        def response = traverseService.traverseMatrix(dna)
+        def response = traverseService.findMutant(dna)
 
         then:
         response >= MINIMUM_COUNT_TO_BE_A_MUTANT
@@ -116,7 +116,7 @@ class TraverseServiceSpec extends Specification {
         ]
 
         when:
-        def response = traverseService.traverseMatrix(dna)
+        def response = traverseService.findMutant(dna)
 
         then:
         response < MINIMUM_COUNT_TO_BE_A_MUTANT
@@ -141,7 +141,7 @@ class TraverseServiceSpec extends Specification {
         ]
 
         when:
-        def response = traverseService.traverseMatrix(dna)
+        def response = traverseService.findMutant(dna)
 
         then:
         response >= MINIMUM_COUNT_TO_BE_A_MUTANT
@@ -160,7 +160,7 @@ class TraverseServiceSpec extends Specification {
         ]
 
         when:
-        def response = traverseService.traverseMatrix(dna)
+        def response = traverseService.findMutant(dna)
 
         then:
         response >= MINIMUM_COUNT_TO_BE_A_MUTANT
@@ -181,7 +181,7 @@ class TraverseServiceSpec extends Specification {
         ]
 
         when:
-        def response = traverseService.traverseMatrix(dna)
+        def response = traverseService.findMutant(dna)
 
         then:
         response >= MINIMUM_COUNT_TO_BE_A_MUTANT
@@ -201,7 +201,7 @@ class TraverseServiceSpec extends Specification {
         ]
 
         when:
-        def response = traverseService.traverseMatrix(dna)
+        def response = traverseService.findMutant(dna)
 
         then:
         response >= MINIMUM_COUNT_TO_BE_A_MUTANT
@@ -218,7 +218,7 @@ class TraverseServiceSpec extends Specification {
         ]
 
         when:
-        def response = traverseService.traverseMatrix(dna)
+        def response = traverseService.findMutant(dna)
 
         then:
         response < MINIMUM_COUNT_TO_BE_A_MUTANT
@@ -238,7 +238,7 @@ class TraverseServiceSpec extends Specification {
         ]
 
         when:
-        def response = traverseService.traverseMatrix(dna)
+        def response = traverseService.findMutant(dna)
 
         then:
         response >= MINIMUM_COUNT_TO_BE_A_MUTANT
@@ -256,7 +256,7 @@ class TraverseServiceSpec extends Specification {
         ]
 
         when:
-        def response = traverseService.traverseMatrix(dna)
+        def response = traverseService.findMutant(dna)
 
         then:
         response >= MINIMUM_COUNT_TO_BE_A_MUTANT
@@ -274,7 +274,7 @@ class TraverseServiceSpec extends Specification {
         ]
 
         when:
-        def response = traverseService.traverseMatrix(dna)
+        def response = traverseService.findMutant(dna)
 
         then:
         response >= MINIMUM_COUNT_TO_BE_A_MUTANT
@@ -294,7 +294,7 @@ class TraverseServiceSpec extends Specification {
         ]
 
         when:
-        def response = traverseService.traverseMatrix(dna)
+        def response = traverseService.findMutant(dna)
 
         then:
         response >= MINIMUM_COUNT_TO_BE_A_MUTANT
@@ -311,7 +311,7 @@ class TraverseServiceSpec extends Specification {
         ]
 
         when:
-        def response = traverseService.traverseMatrix(dna)
+        def response = traverseService.findMutant(dna)
 
         then:
         response >= MINIMUM_COUNT_TO_BE_A_MUTANT

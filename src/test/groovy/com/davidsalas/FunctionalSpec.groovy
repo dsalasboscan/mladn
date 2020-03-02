@@ -249,6 +249,161 @@ class FunctionalSpec extends Specification {
         response == new StatDto(2, 1, 0.67D)
     }
 
+    def "given a matrix with mutant genes on horizontal at edges return HTTP 200"() {
+        expect:
+        postIsMutant(
+                """
+                        {
+                            "dna": [
+                                "TTTT",
+                                "AACC",
+                                "ACAC",
+                                "AAAA"
+                            ]
+                        }
+                        """
+        )
+                .andExpect(status().isOk())
+    }
+
+    def "given a matrix with mutant genes on horizontal at center return HTTP 200"() {
+        expect:
+        postIsMutant(
+                """
+                        {
+                            "dna": [
+                                "TTTC",
+                                "AAAA",
+                                "CCCC",
+                                "AAAG"
+                            ]
+                        }
+                        """
+        )
+                .andExpect(status().isOk())
+    }
+
+    def "given a matrix with mutant genes on vertical at edges return HTTP 200"() {
+        expect:
+        postIsMutant(
+                """
+                        {
+                            "dna": [
+                                "ATTC",
+                                "AAAC",
+                                "ACCC",
+                                "AAAC"
+                            ]
+                        }
+                        """
+        )
+                .andExpect(status().isOk())
+    }
+
+    def "given a matrix with mutant genes on vertical at center return HTTP 200"() {
+        expect:
+        postIsMutant(
+                """
+                        {
+                            "dna": [
+                                "CTGC",
+                                "ATGG",
+                                "ATGC",
+                                "ATGC"
+                            ]
+                        }
+                        """
+        )
+                .andExpect(status().isOk())
+    }
+
+    def "given a matrix with only one on vertical at center return HTTP 403"() {
+        expect:
+        postIsMutant(
+                """
+                        {
+                            "dna": [
+                                "CTGC",
+                                "ATCG",
+                                "ATGC",
+                                "ATGC"
+                            ]
+                        }
+                        """
+        )
+                .andExpect(status().isForbidden())
+    }
+
+    def "given a matrix with only one on hortizontal at center return HTTP 403"() {
+        expect:
+        postIsMutant(
+                """
+                       {
+                            "dna": [
+                                "CTGC",
+                                "CCCC",
+                                "ATGC",
+                                "ATGG"
+                            ]
+                        }
+                        """
+        )
+                .andExpect(status().isForbidden())
+    }
+
+    def "given a matrix with only two mutants on diagonal at the center inclined to the right return HTTP 200"() {
+        expect:
+        postIsMutant(
+                """
+                       {
+                            "dna": [
+                                "CTGA",
+                                "CCAC",
+                                "AACC",
+                                "ATGC"
+                            ]
+                        }
+                        """
+        )
+                .andExpect(status().isOk())
+    }
+
+    def "given a matrix with two mutants on diagonal at the edge inclined to the right return HTTP 200"() {
+        expect:
+        postIsMutant(
+                """
+                       {
+                            "dna": [
+                                "CTGAA",
+                                "CCAAA",
+                                "AGAAA",
+                                "AAACA",
+                                "AAGCA"
+                            ]
+                        }
+                        """
+        )
+                .andExpect(status().isOk())
+    }
+
+    def "given a matrix with only one mutant on diagonal at the edge inclined to the right return HTTP 403"() {
+        expect:
+        postIsMutant(
+                """
+                       {
+                            "dna": [
+                                "CTGAA",
+                                "CCAAA",
+                                "AGGAG",
+                                "AAACA",
+                                "AAGCA"
+                            ]
+                        }
+                        """
+        )
+                .andExpect(status().isForbidden())
+    }
+
 
     def postIsMutant(String content) {
         mockMvc.perform(

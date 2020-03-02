@@ -2,7 +2,10 @@
 
 ## Resolución algoritmo
 El arreglo con ADN lo delego a 8 threads que se encargan de recorrelo
-desde distintas direcciones para ir encontrando los mutantes.
+desde distintas direcciones, son dos para buscar en las verticales uno desde el lado 
+izquierdo y otro desde el lado derecho de la matriz hasta el centro, dos para buscar 
+horizontalmente, uno partiendo desde abajo y el otro desde arriba hasta el centro, y 
+4 que inician en cada vertice de la matriz y van verificando las diagonales.
 
 Todos los Threads comparten una variable que van actualizando cuando 
 consiguen un mutante, el thread principal que recibe el request HTTP inicia
@@ -18,8 +21,22 @@ letras consecutivas sumara un nuevo mutante a la variable compartida.
 - Cloud: https://mladn.herokuapp.com
 - Local: localhost:9090
 
+## Pasos para levantar el proyecto localmente:
+### Con gradle + spring boot 
+   ```bash
+    git clone git@github.com:dsalasboscan/mladn.git
+    cd mladn
+    ./gradlew bootRun
+   ```
+### Con docker
+   ```bash
+    git clone git@github.com:dsalasboscan/mladn.git
+    cd mladn
+    ./init-docker.sh
+   ```
+
 ## Collection postman
-Esta ubicada en la ruta: $PROJECT_ROOT/env
+Esta ubicada en la ruta: $PROJECT_ROOT/env o desde este link: https://www.getpostman.com/collections/8898a83a88057b558e57
 
 ## Detectar mutantes
 
@@ -61,12 +78,7 @@ HTTP 403 -> En caso de NO detectar un mutante
 ```
 
  
- ## Pasos para levantar el proyecto localmente:
-   ```bash
-    git clone git@github.com:dsalasboscan/mladn.git
-    cd mladn
-    ./gradlew bootRun
-   ```
+
  
  ## Coverage
 Para ver coverage en la raiz del proyecto ejecutar:
@@ -81,7 +93,7 @@ Los resultados estaran en la siguiente ruta: $PROJECT_ROOT/build/jacocoHtml/inde
  * java 1.8
  * spring-boot 2
  * spring data jdbc
- * spock (testing)
- * h2
+ * groovy + spock (testing)
+ * h2 
 
  

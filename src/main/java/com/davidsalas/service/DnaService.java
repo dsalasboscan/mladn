@@ -39,7 +39,7 @@ public class DnaService {
 
     human = new Human(dnaHash);
 
-    if (traverseService.traverseMatrix(dna) > 1) {
+    if (traverseService.findMutant(dna) > 1) {
       human.setMutant(true);
     }
 
