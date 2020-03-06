@@ -1,0 +1,7 @@
+datasource:
+  h2:
+    dna:
+      jdbcUrl: jdbc:h2:mem:Dna
+      username: 'sa'
+      password: ''
+      driver-class-name: org.h2.Driver
