@@ -2,6 +2,7 @@ package com.davidsalas.service;
 
 import com.davidsalas.exception.custom.ArrayDimensionsException;
 import com.davidsalas.exception.custom.InvalidNucleoidNameException;
+import com.davidsalas.metric.Countable;
 import com.davidsalas.model.Nucleoid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +32,8 @@ public class InputValidatorService {
     }
   }
 
-  private void validateMatrixIsSquare(String[] dna) {
+  @Countable(metricName = "counter.test")
+  public void validateMatrixIsSquare(String[] dna) {
     int arrayLength = dna.length;
     if (Arrays.stream(dna).anyMatch(it -> it.length() != arrayLength))
       throw new ArrayDimensionsException();
